@@ -1,0 +1,88 @@
+/* Configuración general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f7f7f7; /* Fondo claro */
+}
+
+/* Estilo del formulario */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo de etiquetas */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Estilo para campos de entrada, listas desplegables y botones */
+input, select, textarea, button {
+    display: block;
+    margin-top: 5px;
+    width: 100%; /* Ocupa toda la pantalla */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Evitar redimensionamiento en campos de texto largos */
+textarea {
+    resize: none;
+}
+
+/* Estilo del botón */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Texto más grande para accesibilidad */
+    padding: 10px 15px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media queries: Ajuste para pantallas más pequeñas */
+@media (max-width: 768px) {
+    body {
+        margin: 10px; /* Margen reducido en móviles */
+    }
+
+    form {
+        padding: 15px; /* Menos padding para ahorrar espacio */
+        width: 100%; /* Asegura que ocupe toda la pantalla */
+    }
+
+    button {
+        font-size: 14px; /* Texto del botón más pequeño en móviles */
+        padding: 10px; /* Botones más compactos */
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 10px; /* Aún menos padding en pantallas muy pequeñas */
+    }
+
+    label {
+        font-size: 14px; /* Texto reducido para etiquetas */
+    }
+
+    input, select, textarea, button {
+        font-size: 14px; /* Ajuste general en el tamaño de los campos */
+        padding: 8px; /* Menos padding en campos */
+    }
+
+    button {
+        font-size: 13px; /* Botón compacto en pantallas pequeñas */
+    }
+}

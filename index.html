@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Cerradas y volver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Registro de Cerradas y volver</h1>
+    <form action="https://script.google.com/macros/s/AKfycbwm4zZ0Vek3kI9VFH7KT6-JLdZhqf5M985D6r8X_icV54nljCgED1xwRUVnlevBww32bA/exec" method="POST" onsubmit="return validarFormulario()">
+       
+        <!-- Pregunta 1: Nombre del Encuestador --> 
+        <label for="encuestador">Nombre del Encuestador:</label>
+        <select id="encuestador" name="encuestador" required onchange="mostrarCampoOtros()">
+            <option value="">Seleccione uno</option>
+            <option value="Claudia Amézquita">Claudia Amézquita</option>
+            <option value="Jhon Quispe">Jhon Quispe</option>
+            <option value="Paul Tevez">Paul Tevez</option>
+            <option value="Anderson Antezana">Anderson Antezana</option>
+            <option value="Antuannete Vela">Antuannete Vela</option>
+            <option value="Zenaida Carhua">Zenaida Carhua</option>
+            <option value="Karim Quintanilla">Karim Quintanilla</option>
+            <option value="Marjorie Llerena">Marjorie Llerena</option>
+            <option value="Manuel Isidro">Manuel Isidro</option>
+            <option value="Maria Palaco">Maria Palaco</option>
+            <option value="Junior Vilca">Junior Vilca</option>
+            <option value="Miguel Alarcon">Miguel Alarcon</option>
+            <option value="Jhonatan Ramirez">Jhonatan Ramirez</option>
+            <option value="Roger Quispe">Roger Quispe</option>
+            <option value="Arlet Reyes">Arlet Reyes</option>
+            <option value="Jacqueline Cardenas">Jacqueline Cardenas</option>
+            <option value="Otros">Otros</option>
+        </select>
+
+        <div id="campoOtros" style="display: none;">
+            <input type="text" id="otrosEncuestador" name="otrosEncuestador" placeholder="Especifique si seleccionó 'Otros'">
+        </div>
+
+        <!-- Pregunta 2: Clúster -->
+        <label for="cluster">Clúster:</label>
+<select id="cluster" name="cluster" required>
+    <option value="">Seleccione uno</option>
+    <option value="Clúster 1">Clúster 1</option>
+    <option value="Clúster 2">Clúster 2</option>
+    <option value="Clúster 3">Clúster 3</option>
+    <option value="Clúster 4">Clúster 4</option>
+    <option value="Clúster 5">Clúster 5</option>
+    <option value="Clúster 6">Clúster 6</option>
+    <option value="Clúster 7">Clúster 7</option>
+    <option value="Clúster 8">Clúster 8</option>
+    <option value="Clúster 9">Clúster 9</option>
+    <option value="Clúster 10">Clúster 10</option>
+    <option value="Clúster 11">Clúster 11</option>
+    <option value="Clúster 12">Clúster 12</option>
+    <option value="Clúster 13">Clúster 13</option>
+    <option value="Clúster 14">Clúster 14</option>
+    <option value="Clúster 15">Clúster 15</option>
+    <option value="Clúster 16">Clúster 16</option>
+    <option value="Clúster 17">Clúster 17</option>
+    <option value="Clúster 18">Clúster 18</option>
+    <option value="Clúster 19">Clúster 19</option>
+    <option value="Clúster 20">Clúster 20</option>
+    <option value="Clúster 21">Clúster 21</option>
+    <option value="Clúster 22">Clúster 22</option>
+    <option value="Clúster 23">Clúster 23</option>
+    <option value="Clúster 24">Clúster 24</option>
+    <option value="Clúster 25">Clúster 25</option>
+    <option value="Clúster 26">Clúster 26</option>
+    <option value="Clúster 27">Clúster 27</option>
+    <option value="Clúster 28">Clúster 28</option>
+    <option value="Clúster 29">Clúster 29</option>
+    <option value="Clúster 30">Clúster 30</option>
+    <option value="Clúster 31">Clúster 31</option>
+    <option value="Clúster 32">Clúster 32</option>
+    <option value="Clúster 33">Clúster 33</option>
+    <option value="Clúster 34">Clúster 34</option>
+    <option value="Clúster 35">Clúster 35</option>
+    <option value="Clúster 36">Clúster 36</option>
+</select>
+
+        <!-- Pregunta 3: Grupo -->
+        <label for="grupo">Grupo:</label>
+        <input type="number" id="grupo" name="grupo" required min="1" max="10" placeholder="Ingrese un valor entre 1 y 10">
+
+        <!-- Pregunta 4: Block-ID -->
+        <label for="blockID">Block-ID:</label>
+        <input type="text" id="blockID" name="blockID" required>
+
+        <!-- Pregunta 5: Resultado de visita -->
+        <label for="resultado">Resultado de visita:</label>
+        <select id="resultado" name="resultado" required onchange="controlarPreguntasAdicionales()">
+            <option value="">Seleccione uno</option>
+            <option value="Cerrada">Cerrada</option>
+            <option value="Volver">Volver</option>
+            <option value="Lote Vacío">Lote Vacío</option>
+            <option value="Local Público">Local Público</option>
+            <option value="Deshabitado">Deshabitado</option>
+            <option value="Renuente">Renuente</option>
+            <option value="No Volver">No Volver</option>
+        </select>
+
+        <!-- Preguntas adicionales (se ocultan inicialmente) -->
+        <div id="preguntasAdicionales" style="display: none;">
+            <!-- Pregunta 6: Manzana - Lote -->
+            <label for="manzanaLote">Manzana - Lote:</label>
+            <input type="text" id="manzanaLote" name="manzanaLote">
+
+            <!-- Pregunta 7: Descripción de la casa -->
+            <label for="descripcionCasa">Descripción de la casa:</label>
+            <textarea id="descripcionCasa" name="descripcionCasa" rows="4"></textarea>
+
+            <!-- Pregunta 8: Día de visita -->
+            <label for="diaVisita">Día de visita (en caso de volver):</label>
+            <select id="diaVisita" name="diaVisita">
+                <option value="">Seleccione uno</option>
+                <option value="Lunes - Viernes">Lunes - Viernes</option>
+                <option value="Sábado - Domingo">Sábado - Domingo</option>
+            </select>
+
+            <!-- Pregunta 9: Más de un hogar -->
+            <label for="hogares">¿Estás reportando más de un hogar?</label>
+            <select id="hogares" name="hogares">
+                <option value="">Seleccione uno</option>
+                <option value="Estoy reportando sólo un hogar">Estoy reportando sólo un hogar</option>
+                <option value="Estoy reportando MÁS de un hogar">Estoy reportando MÁS de un hogar</option>
+            </select>
+
+            <!-- Pregunta 10: Visitas -->
+            <label for="visitas">Marcar si corresponde a segundas o terceras visitas:</label>
+            <select id="visitas" name="visitas">
+                <option value="">Seleccione uno</option>
+                <option value="Es primera visita">Es primera visita</option>
+                <option value="Es segunda visita">Es segunda visita</option>
+                <option value="Es tercera visita">Es tercera visita</option>
+            </select>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
