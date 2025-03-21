@@ -15,7 +15,7 @@ function controlarPreguntasAdicionales() {
     const resultado = document.getElementById("resultado").value;
     const preguntasAdicionales = document.getElementById("preguntasAdicionales");
 
-    if (resultado === "Cerrada" || resultado === "Volver") {
+    if (resultado === "Cerrada" || resultado === "Volver" || resultado === "E.Completa" || resultado === "E.Incompleta" || resultado === "FSP") {
         preguntasAdicionales.style.display = "block"; // Mostrar preguntas adicionales
     } else {
         preguntasAdicionales.style.display = "none"; // Ocultar preguntas adicionales
