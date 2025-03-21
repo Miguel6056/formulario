@@ -47,12 +47,6 @@ function controlarPreguntasAdicionales() {
     }
 }
 
-
-
-
-
-
-
 // Formatear el campo Manzana - Lote
 function formatearManzanaLote(input) {
     input.value = input.value.replace(/\s+/g, '').toLowerCase(); // Elimina espacios y convierte a minúsculas
@@ -62,10 +56,26 @@ function formatearManzanaLote(input) {
 function validarFormulario() {
     const grupo = document.getElementById("grupo").value;
 
+    // Validar el campo "Grupo"
     if (grupo < 1 || grupo > 10) {
         alert("Por favor, ingrese un valor válido para Grupo (entre 1 y 10).");
-        return false; // Evitar el envío del formulario
+        return false; // Detener el envío si los datos no son válidos
     }
 
-    return true; // Permitir el envío si todo está correcto
+    // Mostrar el mensaje de éxito después del envío
+    setTimeout(() => {
+        document.querySelector("form").style.display = "none"; // Ocultar el formulario
+        const mensajeEnvio = document.getElementById("mensajeEnvio");
+        mensajeEnvio.style.display = "block"; // Mostrar mensaje y botón
+    }, 1000); // Breve retraso para simular el tiempo de procesamiento del envío
+
+    return true; // Permitir el envío en tiempo real
+}
+
+// Función para llenar otra encuesta
+function llenarOtraEncuesta() {
+    // Reiniciar el formulario y mostrarlo nuevamente
+    document.querySelector("form").reset(); // Reinicia los valores del formulario
+    document.querySelector("form").style.display = "block"; // Muestra el formulario
+    document.getElementById("mensajeEnvio").style.display = "none"; // Oculta el mensaje y el botón
 }
