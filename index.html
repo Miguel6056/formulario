@@ -8,8 +8,12 @@
 </head>
 <body>
     <h1>Padrón Digital</h1>
-    <form action="https://script.google.com/macros/s/AKfycbwf77H1p2mEZXcHEA06DqvaaH7FOV3IsdYlP2vYJFPxnNmXlVqmbdfMR0gYswlLW4YtHg/exec" method="POST" onsubmit="return validarFormulario()">
+    <form action="https://script.google.com/macros/s/AKfycbzJXmMH23BLozs6nH3WLqk9JnkJHWaansZOJU9-HyqiS-WwcotVZqTrUsht_FdfEK_YGQ/exec" method="POST" onsubmit="return validarFormulario()">
        
+        <!-- Pregunta automática: Fecha -->
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" readonly>
+
         <!-- Pregunta 1: Nombre del Encuestador --> 
         <label for="encuestador">Nombre del Encuestador:</label>
         <select id="encuestador" name="encuestador" required onchange="mostrarCampoOtros()">

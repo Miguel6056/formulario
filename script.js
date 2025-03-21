@@ -1,3 +1,14 @@
+// Configurar la fecha automáticamente al cargar la página
+window.onload = function () {
+    const fecha = document.getElementById("fecha");
+    const hoy = new Date();
+    const dia = hoy.getDate().toString().padStart(2, '0'); // Asegura que el día tenga dos dígitos
+    const mes = (hoy.getMonth() + 1).toString().padStart(2, '0'); // Meses comienzan en 0, sumamos 1
+    const año = hoy.getFullYear();
+
+    fecha.value = `${dia}/${mes}/${año}`; // Formato DD/MM/AAAA
+};
+
 // Mostrar el campo "Otros" en la primera pregunta
 function mostrarCampoOtros() {
     const encuestador = document.getElementById("encuestador").value;
