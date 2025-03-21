@@ -52,41 +52,14 @@ function formatearManzanaLote(input) {
     input.value = input.value.replace(/\s+/g, '').toLowerCase(); // Elimina espacios y convierte a minúsculas
 }
 
-// Validar y enviar el formulario con manejo de errores
-async function validarFormulario(event) {
-    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-
-    const form = document.querySelector("form"); // Seleccionar el formulario
-    const formData = new FormData(form); // Capturar los datos del formulario
-
-    // Validar el campo "Grupo"
+// Validar el formulario antes de enviarlo
+function validarFormulario() {
     const grupo = document.getElementById("grupo").value;
+
     if (grupo < 1 || grupo > 10) {
         alert("Por favor, ingrese un valor válido para Grupo (entre 1 y 10).");
-        return false; // Detener el envío si los datos no son válidos
+        return false; // Evitar el envío del formulario
     }
 
-    try {
-        // Enviar los datos al Apps Script
-        const response = await fetch(form.action, {
-            method: "POST",
-            body: formData,
-        });
-
-        const result = await response.json(); // Procesar la respuesta como JSON
-
-        if (result.success) {
-            // Mostrar mensaje de éxito si los datos se guardaron correctamente
-            form.style.display = "none"; // Ocultar el formulario
-            const mensajeEnvio = document.getElementById("mensajeEnvio");
-            mensajeEnvio.style.display = "block"; // Mostrar el mensaje
-            mensajeEnvio.querySelector("p").innerText = result.message; // Actualizar mensaje dinámicamente
-        } else {
-            // Mostrar un mensaje de error si algo salió mal en Apps Script
-            alert(result.message); // Mensaje para el usuario
-        }
-    } catch (error) {
-        // Manejar errores de conexión o problemas inesperados
-        alert("Hubo un problema al enviar el formulario. Verifica tu conexión e inténtalo de nuevo.");
-    }
+    return true; // Permitir el envío si todo está correcto
 }
