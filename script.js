@@ -54,3 +54,18 @@ function validarFormulario() {
 
     return true; // Permitir el envío si todo está correcto
 }
+
+// Función para "Nuevo Ingreso"
+function nuevoFormulario() {
+    // Reiniciar el formulario y mostrarlo de nuevo
+    document.querySelector("form").reset();
+    document.querySelector("form").style.display = "block";
+    document.getElementById("mensajeEnvio").style.display = "none";
+}
+
+// Función para "Terminar y Cerrar"
+function cerrarFormulario() {
+    // Opcional: mostrar un mensaje final y cerrar la ventana
+    alert("Gracias por usar el formulario. ¡Hasta la próxima!");
+    window.close(); // Cierra la ventana (puede que no funcione en algunos navegadores)
+}
