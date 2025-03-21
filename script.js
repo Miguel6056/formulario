@@ -10,16 +10,37 @@ function mostrarCampoOtros() {
     }
 }
 
+// Eliminar espacios en el campo Block-ID
+function eliminarEspacios(input) {
+    input.value = input.value.replace(/\s+/g, ''); // Elimina todos los espacios
+}
+
+
 // Controlar las preguntas adicionales según la respuesta de "Resultado de visita"
 function controlarPreguntasAdicionales() {
     const resultado = document.getElementById("resultado").value;
     const preguntasAdicionales = document.getElementById("preguntasAdicionales");
 
+    // Selecciona los campos adicionales
+    const camposAdicionales = preguntasAdicionales.querySelectorAll("input, textarea, select");
+
     if (resultado === "Cerrada" || resultado === "Volver" || resultado === "E.Completa" || resultado === "E.Incompleta") {
         preguntasAdicionales.style.display = "block"; // Mostrar preguntas adicionales
+        camposAdicionales.forEach(campo => {
+            campo.setAttribute("required", true); // Hacer los campos obligatorios
+        });
     } else {
         preguntasAdicionales.style.display = "none"; // Ocultar preguntas adicionales
+        camposAdicionales.forEach(campo => {
+            campo.removeAttribute("required"); // Quitar obligatoriedad
+        });
     }
+}
+
+
+// Formatear el campo Manzana - Lote
+function formatearManzanaLote(input) {
+    input.value = input.value.replace(/\s+/g, '').toLowerCase(); // Elimina espacios y convierte a minúsculas
 }
 
 // Validar el formulario antes de enviarlo

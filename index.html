@@ -85,7 +85,7 @@
 
         <!-- Pregunta 4: Block-ID -->
         <label for="blockID">Block-ID:</label>
-        <input type="text" id="blockID" name="blockID" required>
+        <input type="text" id="blockID" name="blockID" required oninput="eliminarEspacios(this)">
 
         <!-- Pregunta 5: Resultado de visita -->
         <label for="resultado">Resultado de visita:</label>
@@ -107,7 +107,7 @@
         <div id="preguntasAdicionales" style="display: none;">
             <!-- Pregunta 6: Manzana - Lote -->
             <label for="manzanaLote">Manzana - Lote:</label>
-            <input type="text" id="manzanaLote" name="manzanaLote">
+            <input type="text" id="manzanaLote" name="manzanaLote" oninput="formatearManzanaLote(this)">
 
             <!-- Pregunta 7: Descripción de la casa -->
             <label for="descripcionCasa">Descripción de la casa:</label>
