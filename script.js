@@ -52,30 +52,41 @@ function formatearManzanaLote(input) {
     input.value = input.value.replace(/\s+/g, '').toLowerCase(); // Elimina espacios y convierte a minúsculas
 }
 
-// Validar el formulario antes de enviarlo
-function validarFormulario() {
-    const grupo = document.getElementById("grupo").value;
+// Validar y enviar el formulario con manejo de errores
+async function validarFormulario(event) {
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+    const form = document.querySelector("form"); // Seleccionar el formulario
+    const formData = new FormData(form); // Capturar los datos del formulario
 
     // Validar el campo "Grupo"
+    const grupo = document.getElementById("grupo").value;
     if (grupo < 1 || grupo > 10) {
         alert("Por favor, ingrese un valor válido para Grupo (entre 1 y 10).");
         return false; // Detener el envío si los datos no son válidos
     }
 
-    // Mostrar el mensaje de éxito después del envío
-    setTimeout(() => {
-        document.querySelector("form").style.display = "none"; // Ocultar el formulario
-        const mensajeEnvio = document.getElementById("mensajeEnvio");
-        mensajeEnvio.style.display = "block"; // Mostrar mensaje y botón
-    }, 1000); // Breve retraso para simular el tiempo de procesamiento del envío
+    try {
+        // Enviar los datos al Apps Script
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+        });
 
-    return true; // Permitir el envío en tiempo real
-}
+        const result = await response.json(); // Procesar la respuesta como JSON
 
-// Función para llenar otra encuesta
-function llenarOtraEncuesta() {
-    // Reiniciar el formulario y mostrarlo nuevamente
-    document.querySelector("form").reset(); // Reinicia los valores del formulario
-    document.querySelector("form").style.display = "block"; // Muestra el formulario
-    document.getElementById("mensajeEnvio").style.display = "none"; // Oculta el mensaje y el botón
+        if (result.success) {
+            // Mostrar mensaje de éxito si los datos se guardaron correctamente
+            form.style.display = "none"; // Ocultar el formulario
+            const mensajeEnvio = document.getElementById("mensajeEnvio");
+            mensajeEnvio.style.display = "block"; // Mostrar el mensaje
+            mensajeEnvio.querySelector("p").innerText = result.message; // Actualizar mensaje dinámicamente
+        } else {
+            // Mostrar un mensaje de error si algo salió mal en Apps Script
+            alert(result.message); // Mensaje para el usuario
+        }
+    } catch (error) {
+        // Manejar errores de conexión o problemas inesperados
+        alert("Hubo un problema al enviar el formulario. Verifica tu conexión e inténtalo de nuevo.");
+    }
 }

@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f7f7f7; /* Fondo claro */
+    background-coloar: #f7f7f7; /* Fondo claro */
 }
 
 /* Estilo del formulario */
@@ -46,6 +46,8 @@ button {
     font-size: 16px; /* Texto más grande para accesibilidad */
     padding: 10px 15px;
 }
+
+
 
 button:hover {
     background-color: #0056b3;
