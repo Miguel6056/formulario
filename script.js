@@ -31,19 +31,65 @@ function controlarPreguntasAdicionales() {
     const resultado = document.getElementById("resultado").value;
     const preguntasAdicionales = document.getElementById("preguntasAdicionales");
 
-    // Selecciona los campos adicionales
-    const camposAdicionales = preguntasAdicionales.querySelectorAll("input, textarea, select");
+    // Seleccionar campos específicos
+    const manzanaLote = document.getElementById("manzanaLote");
+    const descripcionCasa = document.getElementById("descripcionCasa");
+    const labelManzanaLote = document.querySelector("label[for='manzanaLote']");
+    const labelDescripcionCasa = document.querySelector("label[for='descripcionCasa']");
 
-    if (resultado === "Cerrada" || resultado === "Volver" || resultado === "E.Completa" || resultado === "E.Incompleta") {
-        preguntasAdicionales.style.display = "block"; // Mostrar preguntas adicionales
-        camposAdicionales.forEach(campo => {
-            campo.setAttribute("required", true); // Hacer los campos obligatorios
+    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#diaVisita, #hogares, #visitas");
+    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='diaVisita'], label[for='hogares'], label[for='visitas']");
+
+    // Condición para "Cerrada" y "Volver"
+    if (resultado === "Cerrada" || resultado === "Volver") {
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección completa
+        otrosCamposAdicionales.forEach(campo => {
+            campo.style.display = "block"; // Mostrar campos adicionales
+            campo.setAttribute("required", true); // Hacerlos obligatorios
         });
-    } else {
-        preguntasAdicionales.style.display = "none"; // Ocultar preguntas adicionales
-        camposAdicionales.forEach(campo => {
+        otrosLabelsAdicionales.forEach(label => {
+            label.style.display = "block"; // Mostrar etiquetas asociadas
+        });
+        manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
+        descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
+        labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
+        labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
+        manzanaLote.removeAttribute("required");
+        descripcionCasa.removeAttribute("required");
+    } 
+    // Condición para "E.Completa" y "E.Incompleta"
+    else if (resultado === "E.Completa" || resultado === "E.Incompleta") {
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección
+        otrosCamposAdicionales.forEach(campo => {
+            campo.style.display = "none"; // Ocultar otros campos adicionales
+            campo.removeAttribute("required"); // Quitar obligatoriedad de los otros campos
+        });
+        otrosLabelsAdicionales.forEach(label => {
+            label.style.display = "none"; // Ocultar etiquetas asociadas a otros campos
+        });
+        manzanaLote.style.display = "block"; // Mostrar Manzana - Lote
+        descripcionCasa.style.display = "block"; // Mostrar Descripción de la casa
+        labelManzanaLote.style.display = "block"; // Mostrar etiqueta de Manzana - Lote
+        labelDescripcionCasa.style.display = "block"; // Mostrar etiqueta de Descripción de la casa
+        manzanaLote.setAttribute("required", true); // Hacer obligatorio Manzana - Lote
+        descripcionCasa.setAttribute("required", true); // Hacer obligatorio Descripción de la casa
+    } 
+    // Ocultar todo si no cumple ninguna condición
+    else {
+        preguntasAdicionales.style.display = "none"; // Ocultar sección completa
+        otrosCamposAdicionales.forEach(campo => {
+            campo.style.display = "none"; // Ocultar otros campos
             campo.removeAttribute("required"); // Quitar obligatoriedad
         });
+        otrosLabelsAdicionales.forEach(label => {
+            label.style.display = "none"; // Ocultar etiquetas de otros campos
+        });
+        manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
+        descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
+        labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
+        labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
+        manzanaLote.removeAttribute("required");
+        descripcionCasa.removeAttribute("required");
     }
 }
 
