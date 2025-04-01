@@ -26,80 +26,91 @@ function eliminarEspacios(input) {
     input.value = input.value.replace(/\s+/g, ''); // Elimina todos los espacios
 }
 
+// Controlar las preguntas adicionales según la respuesta de "Resultado de visita"
 function controlarPreguntasAdicionales() {
     const resultado = document.getElementById("resultado").value;
     const preguntasAdicionales = document.getElementById("preguntasAdicionales");
 
-    // Seleccionar campos específicos
+    // Selección de campos específicos
     const manzanaLote = document.getElementById("manzanaLote");
     const descripcionCasa = document.getElementById("descripcionCasa");
     const labelManzanaLote = document.querySelector("label[for='manzanaLote']");
     const labelDescripcionCasa = document.querySelector("label[for='descripcionCasa']");
-
-    // Día de visita (Pregunta 8)
     const diaVisita = document.getElementById("diaVisita");
     const labelDiaVisita = document.querySelector("label[for='diaVisita']");
+    const observaciones = document.getElementById("observaciones");
+    const labelObservaciones = document.querySelector("label[for='observaciones']");
 
-    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#manzanaLote, #descripcionCasa, #hogares, #visitas");
-    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='manzanaLote'], label[for='descripcionCasa'], label[for='hogares'], label[for='visitas']");
+    // Mostrar Observaciones siempre
+    observaciones.style.display = "block"; // Mantener visible el campo de Observaciones
+    labelObservaciones.style.display = "block"; // Mantener visible la etiqueta de Observaciones
 
-    // Condición para "Cerrada" y "Volver"
-    if (resultado === "Cerrada" || resultado === "Volver") {
-        preguntasAdicionales.style.display = "block"; // Mostrar la sección completa
-        otrosCamposAdicionales.forEach(campo => {
-            campo.style.display = "block"; // Mostrar campos adicionales
-            campo.setAttribute("required", true); // Hacerlos obligatorios
-        });
-        otrosLabelsAdicionales.forEach(label => {
-            label.style.display = "block"; // Mostrar etiquetas asociadas
-        });
+    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#descripcionCasa, #hogares, #visitas");
+    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='descripcionCasa'], label[for='hogares'], label[for='visitas']");
 
-        // 🔴 Nueva condición: Ocultar "Día de visita" solo si es "Cerrada"
-        if (resultado === "Cerrada") {
-            diaVisita.style.display = "none";
-            labelDiaVisita.style.display = "none";
-            diaVisita.removeAttribute("required");
-        } else {
-            diaVisita.style.display = "block";
-            labelDiaVisita.style.display = "block";
-            diaVisita.setAttribute("required", true);
-        }
+    // 📌 Si la respuesta es "Volver"
+    if (resultado === "Volver") {
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección de preguntas adicionales
+        otrosCamposAdicionales.forEach(campo => campo.style.display = "block"); // Mostrar otros campos adicionales
+        otrosLabelsAdicionales.forEach(label => label.style.display = "block"); // Mostrar etiquetas de otros campos
+        diaVisita.style.display = "block"; // Mostrar Día de Visita
+        labelDiaVisita.style.display = "block"; // Mostrar etiqueta de Día de Visita
+        diaVisita.setAttribute("required", true); // Hacer obligatorio Día de Visita
     } 
-    // Condición para "E.Completa" y "E.Incompleta"
+    // 📌 Si la respuesta es "Cerrada"
+    else if (resultado === "Cerrada") {
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección de preguntas adicionales
+        diaVisita.style.display = "none"; // Ocultar Día de Visita
+        labelDiaVisita.style.display = "none"; // Ocultar etiqueta de Día de Visita
+        diaVisita.removeAttribute("required"); // Quitar obligatoriedad de Día de Visita
+    } 
+    // 📌 Si la respuesta es "E.Completa" o "E.Incompleta"
     else if (resultado === "E.Completa" || resultado === "E.Incompleta") {
-        preguntasAdicionales.style.display = "block"; // Mostrar la sección
-        otrosCamposAdicionales.forEach(campo => {
-            campo.style.display = "none"; // Ocultar otros campos adicionales
-            campo.removeAttribute("required"); // Quitar obligatoriedad de los otros campos
-        });
-        otrosLabelsAdicionales.forEach(label => {
-            label.style.display = "none"; // Ocultar etiquetas asociadas a otros campos
-        });
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección de preguntas adicionales
         manzanaLote.style.display = "block"; // Mostrar Manzana - Lote
         descripcionCasa.style.display = "block"; // Mostrar Descripción de la casa
         labelManzanaLote.style.display = "block"; // Mostrar etiqueta de Manzana - Lote
         labelDescripcionCasa.style.display = "block"; // Mostrar etiqueta de Descripción de la casa
         manzanaLote.setAttribute("required", true); // Hacer obligatorio Manzana - Lote
         descripcionCasa.setAttribute("required", true); // Hacer obligatorio Descripción de la casa
+        diaVisita.style.display = "none"; // Ocultar Día de Visita
+        labelDiaVisita.style.display = "none"; // Ocultar etiqueta de Día de Visita
+        diaVisita.removeAttribute("required"); // Quitar obligatoriedad de Día de Visita
     } 
-    // Ocultar todo si no cumple ninguna condición
-    else {
-        preguntasAdicionales.style.display = "none"; // Ocultar sección completa
-        otrosCamposAdicionales.forEach(campo => {
-            campo.style.display = "none"; // Ocultar otros campos
-            campo.removeAttribute("required"); // Quitar obligatoriedad
-        });
-        otrosLabelsAdicionales.forEach(label => {
-            label.style.display = "none"; // Ocultar etiquetas de otros campos
-        });
-        manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
+    // 📌 Si la respuesta es "FSP"
+    else if (resultado === "FSP") {
+        preguntasAdicionales.style.display = "block"; // Mostrar la sección de preguntas adicionales
+        manzanaLote.style.display = "block"; // Mostrar Manzana - Lote
+        labelManzanaLote.style.display = "block"; // Mostrar etiqueta de Manzana - Lote
+        manzanaLote.setAttribute("required", true); // Hacer obligatorio Manzana - Lote
         descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
-        labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
         labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
-        manzanaLote.removeAttribute("required");
-        descripcionCasa.removeAttribute("required");
+        descripcionCasa.removeAttribute("required"); // Quitar obligatoriedad de Descripción de la casa
+        diaVisita.style.display = "none"; // Ocultar Día de Visita
+        labelDiaVisita.style.display = "none"; // Ocultar etiqueta de Día de Visita
+        diaVisita.removeAttribute("required"); // Quitar obligatoriedad de Día de Visita
+    } 
+    // 📌 Si es "Deshabitado", "Renuente" u otro valor
+    else {
+        preguntasAdicionales.style.display = "none"; // Ocultar la sección de preguntas adicionales
+        otrosCamposAdicionales.forEach(campo => campo.style.display = "none"); // Ocultar otros campos adicionales
+        otrosLabelsAdicionales.forEach(label => label.style.display = "none"); // Ocultar etiquetas de otros campos
+        manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
+        labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
+        manzanaLote.removeAttribute("required"); // Quitar obligatoriedad de Manzana - Lote
+        descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
+        labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
+        descripcionCasa.removeAttribute("required"); // Quitar obligatoriedad de Descripción de la casa
+        diaVisita.style.display = "none"; // Ocultar Día de Visita
+        labelDiaVisita.style.display = "none"; // Ocultar etiqueta de Día de Visita
+        diaVisita.removeAttribute("required"); // Quitar obligatoriedad de Día de Visita
+
+        // Asegurar que Observaciones siempre se vea
+        preguntasAdicionales.style.display = "block"; 
     }
 }
+
+
 
 // Formatear el campo Manzana - Lote
 function formatearManzanaLote(input) {
