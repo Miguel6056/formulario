@@ -37,8 +37,8 @@ function controlarPreguntasAdicionales() {
     const labelManzanaLote = document.querySelector("label[for='manzanaLote']");
     const labelDescripcionCasa = document.querySelector("label[for='descripcionCasa']");
 
-    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#diaVisita, #hogares, #visitas");
-    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='diaVisita'], label[for='hogares'], label[for='visitas']");
+    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#manzanaLote, #descripcionCasa, #diaVisita, #hogares, #visitas");
+    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='manzanaLote'], label[for='descripcionCasa'], label[for='diaVisita'], label[for='hogares'], label[for='visitas']");
 
     // Condición para "Cerrada" y "Volver"
     if (resultado === "Cerrada" || resultado === "Volver") {
@@ -50,12 +50,12 @@ function controlarPreguntasAdicionales() {
         otrosLabelsAdicionales.forEach(label => {
             label.style.display = "block"; // Mostrar etiquetas asociadas
         });
-        manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
-        descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
-        labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
-        labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
-        manzanaLote.removeAttribute("required");
-        descripcionCasa.removeAttribute("required");
+        //manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
+        //descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
+        //labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
+        //labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
+        //manzanaLote.removeAttribute("required");
+        //descripcionCasa.removeAttribute("required");
     } 
     // Condición para "E.Completa" y "E.Incompleta"
     else if (resultado === "E.Completa" || resultado === "E.Incompleta") {
