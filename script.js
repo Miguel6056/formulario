@@ -26,7 +26,6 @@ function eliminarEspacios(input) {
     input.value = input.value.replace(/\s+/g, ''); // Elimina todos los espacios
 }
 
-// Controlar las preguntas adicionales según la respuesta de "Resultado de visita"
 function controlarPreguntasAdicionales() {
     const resultado = document.getElementById("resultado").value;
     const preguntasAdicionales = document.getElementById("preguntasAdicionales");
@@ -37,8 +36,12 @@ function controlarPreguntasAdicionales() {
     const labelManzanaLote = document.querySelector("label[for='manzanaLote']");
     const labelDescripcionCasa = document.querySelector("label[for='descripcionCasa']");
 
-    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#manzanaLote, #descripcionCasa, #diaVisita, #hogares, #visitas");
-    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='manzanaLote'], label[for='descripcionCasa'], label[for='diaVisita'], label[for='hogares'], label[for='visitas']");
+    // Día de visita (Pregunta 8)
+    const diaVisita = document.getElementById("diaVisita");
+    const labelDiaVisita = document.querySelector("label[for='diaVisita']");
+
+    const otrosCamposAdicionales = preguntasAdicionales.querySelectorAll("#manzanaLote, #descripcionCasa, #hogares, #visitas");
+    const otrosLabelsAdicionales = preguntasAdicionales.querySelectorAll("label[for='manzanaLote'], label[for='descripcionCasa'], label[for='hogares'], label[for='visitas']");
 
     // Condición para "Cerrada" y "Volver"
     if (resultado === "Cerrada" || resultado === "Volver") {
@@ -50,12 +53,17 @@ function controlarPreguntasAdicionales() {
         otrosLabelsAdicionales.forEach(label => {
             label.style.display = "block"; // Mostrar etiquetas asociadas
         });
-        //manzanaLote.style.display = "none"; // Ocultar Manzana - Lote
-        //descripcionCasa.style.display = "none"; // Ocultar Descripción de la casa
-        //labelManzanaLote.style.display = "none"; // Ocultar etiqueta de Manzana - Lote
-        //labelDescripcionCasa.style.display = "none"; // Ocultar etiqueta de Descripción de la casa
-        //manzanaLote.removeAttribute("required");
-        //descripcionCasa.removeAttribute("required");
+
+        // 🔴 Nueva condición: Ocultar "Día de visita" solo si es "Cerrada"
+        if (resultado === "Cerrada") {
+            diaVisita.style.display = "none";
+            labelDiaVisita.style.display = "none";
+            diaVisita.removeAttribute("required");
+        } else {
+            diaVisita.style.display = "block";
+            labelDiaVisita.style.display = "block";
+            diaVisita.setAttribute("required", true);
+        }
     } 
     // Condición para "E.Completa" y "E.Incompleta"
     else if (resultado === "E.Completa" || resultado === "E.Incompleta") {
