@@ -56,7 +56,7 @@ button:hover {
 /* Media queries: Ajuste para pantallas más pequeñas */
 @media (max-width: 768px) {
     body {
-        margin: 10px; /* Margen reducido en móviles */
+        margin: 30px; /* Margen reducido en móviles */
     }
 
     form {
